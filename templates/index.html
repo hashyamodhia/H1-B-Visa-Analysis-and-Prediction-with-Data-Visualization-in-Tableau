@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H1-B Visa Prediction</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-left-btn {
+            position: absolute;
+            top: 10px;
+            left: calc(100% - 200px);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <div class="top-left-btn">
+            <a href="https://public.tableau.com/app/profile/aryan.khetan/viz/H1BProject_17330659216140/HomePage"
+                class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                H1B Visa Analysis (2019 - 2023)
+            </a>
+        </div> -->
+
+        <h2 style="font-weight: bold;">H1-B Visa Prediction</h2>
+        <form action="/predict_value" method="POST">
+            <div class="form-group">
+                <label for="dropdownYesNo1">Full-Time Position (Yes/No)</label>
+                <select class="form-control" id="dropdownYesNo1" name="FULL_TIME_POSITION" required>
+                    <option value="">Select Yes or No</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdownYesNo2">Agent Representing Employer (Yes/No)</label>
+                <select class="form-control" id="dropdownYesNo2" name="AGENT_REPRESENTING_EMPLOYER" required>
+                    <option value="">Select Yes or No</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdownYesNo3">H1B Dependent (Yes/No)</label>
+                <select class="form-control" id="dropdownYesNo3" name="H1B_DEPENDENT" required>
+                    <option value="">Select Yes or No</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dropdownYesNo4">Willful Violator (Yes/No)</label>
+                <select class="form-control" id="dropdownYesNo4" name="WILLFUL_VIOLATOR" required>
+                    <option value="">Select Yes or No</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="stateDropdown">State</label>
+                <select class="form-control" id="stateDropdown" name="WORKSITE_STATE">
+                    <option value="">Select a state...</option>
+                    <option value="AL">ALABAMA</option>
+                    <option value="AK">ALASKA</option>
+                    <option value="AZ">ARIZONA</option>
+                    <option value="AR">ARKANSAS</option>
+                    <option value="CA">CALIFORNIA</option>
+                    <option value="CO">COLORADO</option>
+                    <option value="CT">CONNECTICUT</option>
+                    <option value="DE">DELAWARE</option>
+                    <option value="FL">FLORIDA</option>
+                    <option value="GA">GEORGIA</option>
+                    <option value="HI">HAWAII</option>
+                    <option value="ID">IDAHO</option>
+                    <option value="IL">ILLINOIS</option>
+                    <option value="IN">INDIANA</option>
+                    <option value="IA">IOWA</option>
+                    <option value="KS">KANSAS</option>
+                    <option value="KY">KENTUCKY</option>
+                    <option value="LA">LOUISIANA</option>
+                    <option value="ME">MAINE</option>
+                    <option value="MD">MARYLAND</option>
+                    <option value="MA">MASSACHUSETTS</option>
+                    <option value="MI">MICHIGAN</option>
+                    <option value="MN">MINNESOTA</option>
+                    <option value="MS">MISSISSIPPI</option>
+                    <option value="MO">MISSOURI</option>
+                    <option value="MT">MONTANA</option>
+                    <option value="NE">NEBRASKA</option>
+                    <option value="NV">NEVADA</option>
+                    <option value="NH">NEW HAMPSHIRE</option>
+                    <option value="NJ">NEW JERSEY</option>
+                    <option value="NM">NEW MEXICO</option>
+                    <option value="NY">NEW YORK</option>
+                    <option value="NC">NORTH CAROLINA</option>
+                    <option value="ND">NORTH DAKOTA</option>
+                    <option value="OH">OHIO</option>
+                    <option value="OK">OKLAHOMA</option>
+                    <option value="OR">OREGON</option>
+                    <option value="PA">PENNSYLVANIA</option>
+                    <option value="PW">PALAU</option>
+                    <option value="RI">RHODE ISLAND</option>
+                    <option value="SC">SOUTH CAROLINA</option>
+                    <option value="SD">SOUTH DAKOTA</option>
+                    <option value="TN">TENNESSEE</option>
+                    <option value="TX">TEXAS</option>
+                    <option value="UT">UTAH</option>
+                    <option value="VT">VERMONT</option>
+                    <option value="VA">VIRGINIA</option>
+                    <option value="WA">WASHINGTON</option>
+                    <option value="WV">WEST VIRGINIA</option>
+                    <option value="WI">WISCONSIN</option>
+                    <option value="WY">WYOMING</option>
+                    <option value="AS">AMERICAN SAMOA</option>
+                    <option value="GU">GUAM</option>
+                    <option value="MP">NORTHERN MARIANA ISLANDS</option>
+                    <option value="PR">PUERTO RICO</option>
+                    <option value="VI">VIRGIN ISLANDS</option>
+                    <option value="DC">DISTRICT OF COLUMBIA</option>
+                    <option value="ML">MARSHALL ISLANDS</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="optionsDropdown">Occupation</label>
+                <select class="form-control" id="optionsDropdown" name="OCCUPATION">
+                    <option value="">Select an Occupation...</option>
+                    <option value="IT">IT</option>
+                    <option value="ANALYSTS">ANALYSTS</option>
+                    <option value="MANAGER">MANAGER</option>
+                    <option value="MEDICAL">MEDICAL</option>
+                    <option value="EDUCATION">EDUCATION</option>
+                    <option value="DATA">DATA</option>
+                    <option value="FINANCE">FINANCE</option>
+                    <option value="MECHANICAL ENGINEERS">MECHANICAL ENGINEERS</option>
+                    <option value="AUDIT">AUDIT</option>
+                    <option value="ELECTRONICS ENGINEERS">ELECTRONICS ENGINEERS</option>
+                    <option value="ELECTRICAL ENGINEERS">ELECTRICAL ENGINEERS</option>
+                    <option value="SALES-MARKETING">SALES-MARKETING</option>
+                    <option value="INDUSTRIAL ENGINEERS">INDUSTRIAL ENGINEERS</option>
+                    <option value="PHARMACY">PHARMACY</option>
+                    <option value="CIVIL ENGINEERS">CIVIL ENGINEERS</option>
+                    <option value="MATERIAL ENGINEERS">MATERIAL ENGINEERS</option>
+                    <option value="LAW">LAW</option>
+                    <option value="LOGISTICS">LOGISTICS</option>
+                    <option value="CHEMICAL ENGINEERS">CHEMICAL ENGINEERS</option>
+                    <option value="ENVIRONMENTAL">ENVIRONMENTAL</option>
+                    <option value="HR">HR</option>
+                    <option value="MECHATRONICS">MECHATRONICS</option>
+                    <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
+                    <option value="PUBLIC RELATIONS">PUBLIC RELATIONS</option>
+                    <option value="AGRO">AGRO</option>
+                    <option value="others">OTHERS</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="employmentDuration">Employment Duration</label>
+                <input type="number" class="form-control" id="employmentDuration" name="EMPLOYMENT_DURATION_YEARS"
+                    placeholder="Enter duration in years" required min="0" step="0.1">
+            </div>
+
+            <div class="form-group">
+                <label for="numericInput">Total Worker Position</label>
+                <input type="text" class="form-control" id="numericInput" placeholder="Enter Total Worker Position..."
+                    name="TOTAL_WORKER_POSITIONS" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="prevailingWage">Prevailing Wage</label>
+                <input type="number" class="form-control" id="prevailingWage" name="PREVAILING_WAGE_SCALED"
+                    placeholder="Enter Prevailing Wage..." required min="0" step="0.01">
+            </div>
+
+            <button
+                style="font-weight: 500; font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; letter-spacing: 3px;"
+                type="submit" class="btn btn-primary btn-block">Predict</button>
+            <br>
+            <div><a href=" https://public.tableau.com/app/profile/aryan.khetan/viz/H1BProject_17330659216140/HomePage"
+                    class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+                    <div style="font-weight: bold;">H1B Visa Analysis (2019 - 2023)</div>
+                </a>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+</body>
+
+</html>
